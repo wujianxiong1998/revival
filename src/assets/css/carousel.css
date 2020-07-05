@@ -1,0 +1,7 @@
+.my-swipe .van-swipe-item {
+  height: 400px;
+}
+.van-swipe__indicators i {
+  width: 14px;
+  height: 14px;
+}
