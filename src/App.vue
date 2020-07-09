@@ -17,12 +17,13 @@
 </template>
 
 <style lang="scss" scoped>
+$bg:#f3f9f1;
 #app {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
-  background: #40de5a;
+  background: $bg;
 }
 #nav {
   width: 100%;
@@ -30,7 +31,7 @@
   bottom: 0;
   left: 0;
   z-index: 100;
-  background: #a78e44;
+  background: #161823;
 }
 #content {
   padding-bottom: 100px;

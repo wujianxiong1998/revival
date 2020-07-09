@@ -1,43 +1,45 @@
 <template>
-  <div class="home">
+  <div id="home">
     <Message></Message>
     <Carousel></Carousel>
-    <Content></Content>
-    <div class="btn">
-      <van-button
-        type="info"
-        plain
-        size="large"
-        round
-        >发送墙</van-button>
+    <Content ref="wall"></Content>
+    <div class="send">
+      <Wall @refresh="handleRefresh"></Wall>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Carousel from '@/components/carousel/index.vue'
-import Message from '@/components/message/index.vue'
-import Content from '@/components/content/content.vue'
+import Carousel from "@/components/carousel/index.vue";
+import Message from "@/components/message/index.vue";
+import Content from "@/components/content/content.vue";
+import Wall from "@/components/wall/wall.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Carousel,
     Message,
-    Content
-  }
-}
-</script>
-<style lang="scss" scoped>
-  .btn {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0;
-    button {
-      width: 200px;
+    Content,
+    Wall
+  },
+  methods: {
+    handleRefresh() {
+      this.$refs.wall.getDatas();
     }
   }
+};
+</script>
+<style lang="scss" scoped>
+#home {
+  background: #f3f9f1;
+}
+.send {
+  position: absolute;
+  top: 380px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
 </style>

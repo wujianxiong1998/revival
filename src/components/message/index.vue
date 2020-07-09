@@ -3,14 +3,26 @@
     <van-notice-bar
       left-icon="volume-o"
       color="#000"
-      background="#40de5a"
-      text="在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。面对心墙说给自己或者它听"
+      background="#f3f9f1"
+      :text="txt"
     />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      txt: '杨绛：我们曾如此渴望命运的波澜，到最后才发现：人生最曼妙的风景，竟是内心的淡定与从容……我们曾如此期盼外界的认可，到最后才知道：世界是自己的，与他人毫无关系！'
+    }
+  },
+  created() {
+    
+  },
+  methods: {
+    
+  },
+};
 </script>
 
 <style lang="scss" scoped>

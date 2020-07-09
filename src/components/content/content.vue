@@ -1,9 +1,17 @@
 <template>
   <div>
-    <div class="item flex" v-for="item of datas" :key="item._id">
-      <p>{{item.name}}</p>
-      <div class="btn" @click="handleDel(item._id)">删除</div>
-    </div>
+    <!-- 留言列表 -->
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div class="item" v-for="(item,index) of datas" :key="item._id">
+        <div class="flex between">
+          <p><span class="bold" v-if="index<=4">Top</span>{{index+1}}：<span class="red">{{item.wallName}}</span></p>
+          <van-button plain @click="handleAgree(item._id)">赞10</van-button>
+        </div>
+        <p class="indent gray pad-t-b-10">{{item.message | handleWords}}</p>
+      </div>
+    </van-list>
+
+    <!-- 查看更多 -->
   </div>
 </template>
 
@@ -11,7 +19,9 @@
 export default {
   data() {
     return {
-      datas: []
+      datas: [],
+      loading: false,
+      finished: false
     };
   },
   created() {
@@ -19,13 +29,17 @@ export default {
   },
   methods: {
     async getDatas() {
-      const {data:res} = await this.$http.get("/");
-      this.datas = res
+      const { data: res } = await this.$http.get("/");
+      this.datas = res;
+      this.loading = false;
     },
-    async handleDel(id) {
-      const {data:res} = await this.$http.post('/delete', {'_id': id})
-      console.log(res)
-      this.getDatas()
+    handleAgree(id) {
+      console.log(id)
+    },
+    // 下滑加载更多
+    onLoad() {
+      this.getDatas();
+      this.loading = false;
     }
   }
 };

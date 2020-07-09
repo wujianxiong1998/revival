@@ -1,0 +1,37 @@
+.flex {
+    display: flex;
+}
+.between {
+    justify-content: space-between;
+}
+.flex1 {
+    flex: 1;
+}
+.center-x {
+    justify-content: center;
+}
+.center-y {
+    align-items: center;
+}
+.center {
+    justify-content: center;
+    align-items: center;
+}
+.indent {
+    text-indent: 2em;
+}
+.gray {
+    color: #6b6882;
+}
+.green {
+    color: #9ed900;
+}
+.red {
+    color: #9d2933
+}
+.bold {
+    font-weight: bold;
+}
+.pad-t-b-10 {
+    padding: 10px 0;
+}
