@@ -8,7 +8,7 @@ import 'lib-flexible/flexible'
 import '@/assets/css/reset.css'
 import '@/plugins/vant.js'
 
-axios.defaults.baseURL = 'http://api.wujianxiong.top'
+axios.defaults.baseURL = 'http://api.wujianxiong.top/api'
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false

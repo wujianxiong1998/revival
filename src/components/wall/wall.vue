@@ -7,7 +7,7 @@
     <!-- 遮罩层 -->
     <div class="pop" v-if="showPop">
       <!-- 输入姓名 -->
-      <van-field v-model="form.wallName" label="给" colon />
+      <van-field v-model="form.wallName" label="给" colon autofocus />
       <!-- 输入 -->
       <van-field
         v-model="form.message"
@@ -19,7 +19,6 @@
         show-word-limit
         clearable
         colon
-        autofocus
       />
       <div class="bottom flex between">
         <div class="flex1 flex center">
@@ -58,11 +57,16 @@ export default {
     async sendMessage() {
       const { data: res } = await this.$http.post("/send", {
         wallName: this.form.wallName,
-        message: this.form.message
+        message: this.form.message,
+        star: 0
       });
       if (res == "OK") {
         this.showPop = false;
-        this.$emit('refresh')
+        this.form = {
+          message: "",
+          wallName: ""
+        };
+        this.$emit("refresh");
       }
     }
   }
@@ -71,7 +75,7 @@ export default {
 
 <style lang="scss" scoped>
 @import url("../../assets/css/comon.css");
-@import url('../../assets/css/vant_reset.css');
+@import url("../../assets/css/vant_reset.css");
 .btn {
   width: 100%;
   display: flex;

@@ -5,7 +5,7 @@
       <div class="item" v-for="(item,index) of datas" :key="item._id">
         <div class="flex between">
           <p><span class="bold" v-if="index<=4">Top</span>{{index+1}}：<span class="red">{{item.wallName}}</span></p>
-          <van-button plain @click="handleAgree(item._id)">赞10</van-button>
+          <van-button plain @click="handleAgree(item._id, item.star)">赞{{item.star | filterStar}}</van-button>
         </div>
         <p class="indent gray pad-t-b-10">{{item.message | handleWords}}</p>
       </div>
@@ -29,17 +29,30 @@ export default {
   },
   methods: {
     async getDatas() {
+      this.loading = true
       const { data: res } = await this.$http.get("/");
       this.datas = res;
-      this.loading = false;
+      if(res.length) {
+        this.finished = true
+        this.loading = false;
+      }
+      this.datas = this.datas.sort((a, b) => {
+        return b['star'] - a['star']
+      })
+      this.$store.commit('vuexTopdata', this.datas.slice(0,5))
     },
-    handleAgree(id) {
-      console.log(id)
+    async handleAgree(id, star) {
+      const { data: res } = await this.$http.post("/star", {
+        _id: id,
+        star
+      });
+      this.getDatas();
     },
     // 下滑加载更多
     onLoad() {
       this.getDatas();
       this.loading = false;
+      console.log(111)
     }
   }
 };

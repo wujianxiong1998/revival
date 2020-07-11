@@ -1,11 +1,10 @@
 <template>
   <div id="message">
-    <van-notice-bar
-      left-icon="volume-o"
-      color="#000"
-      background="#f3f9f1"
-      :text="txt"
-    />
+    <van-notice-bar left-icon="volume-o" :scrollable="false">
+      <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
+        <van-swipe-item v-for="item of $store.state.topdatas" :key="item._id">{{item.message}}--{{item.wallName}}</van-swipe-item>
+      </van-swipe>
+    </van-notice-bar>
   </div>
 </template>
 
@@ -13,21 +12,23 @@
 export default {
   data() {
     return {
-      txt: '杨绛：我们曾如此渴望命运的波澜，到最后才发现：人生最曼妙的风景，竟是内心的淡定与从容……我们曾如此期盼外界的认可，到最后才知道：世界是自己的，与他人毫无关系！'
-    }
+      topdatas: []
+    };
   },
   created() {
-    
+    console.log(this.topdatas)
   },
-  methods: {
-    
-  },
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
-@import url('../../assets/css/message.css');
+@import url("../../assets/css/message.css");
 #message {
   padding: 10px 0;
 }
+ .notice-swipe {
+    height: 40px;
+    line-height: 40px;
+  }
 </style>
